@@ -144,3 +144,7 @@
 /* Keep the introduction compact and both columns aligned at the top. */
 .editorial-hero.editorial-hero-illustrated{padding-top:48px;padding-bottom:64px;align-items:start}.editorial-hero-illustrated .hero-concept{align-self:start}
 @media(max-width:680px){.editorial-hero.editorial-hero-illustrated{padding-top:36px;padding-bottom:48px}}
+
+/* Compact vertical rhythm while retaining clear section boundaries. */
+.editorial .content-section{padding:48px 0 52px}.editorial .contact{padding:48px 0 44px}.editorial h2{margin:18px 0 28px}.editorial .research-row{padding-top:24px;padding-bottom:28px}.editorial .publication{padding:22px 0}.cv-entry{padding:18px 0}.editorial .footer{padding:22px 0 26px}.editorial-hero.editorial-hero-illustrated{padding-top:36px;padding-bottom:44px}.hero-affiliation-block{margin-bottom:22px}
+@media(max-width:780px){.editorial .content-section{padding:36px 0 40px}.editorial .contact{padding:36px 0}.editorial h2{margin:16px 0 24px}.editorial .research-row{padding:20px 0 24px}.editorial-hero.editorial-hero-illustrated{padding-top:28px;padding-bottom:36px}}

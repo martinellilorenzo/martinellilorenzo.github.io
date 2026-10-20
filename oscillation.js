@@ -142,9 +142,9 @@
     rotationToggle.hidden=!aster;
     figure.classList.toggle('rotation-disabled',!rotationEnabled);
     observations.hidden=!blank;figure.classList.toggle('show-observations',blank);
-    submenu.hidden=false;submenu.style.visibility=aster?'visible':'hidden';submenu.inert=!aster;submenu.setAttribute('aria-hidden',String(!aster));multipletPanel.hidden=!aster;if(aster&&spectrum)spectrum.draw(Number(selected.slice(1)),travelling,rotationEnabled);asterTab.setAttribute('aria-expanded',String(aster));
-    patterns.hidden=false;patterns.style.visibility=aster?'visible':'hidden';patterns.inert=!aster;patterns.setAttribute('aria-hidden',String(!aster));
-    surfaceCaption.hidden=false;oscillationCaption.hidden=false;
+    submenu.hidden=!aster;submenu.style.visibility=aster?'visible':'hidden';submenu.inert=!aster;submenu.setAttribute('aria-hidden',String(!aster));multipletPanel.hidden=!aster;if(aster&&spectrum)spectrum.draw(Number(selected.slice(1)),travelling,rotationEnabled);asterTab.setAttribute('aria-expanded',String(aster));
+    patterns.hidden=!aster;patterns.style.visibility=aster?'visible':'hidden';patterns.inert=!aster;patterns.setAttribute('aria-hidden',String(!aster));
+    surfaceCaption.hidden=!surface;oscillationCaption.hidden=!aster;
     surfaceCaption.style.visibility=surface?'visible':'hidden';oscillationCaption.style.visibility=aster?'visible':'hidden';
     surfaceCaption.inert=!surface;oscillationCaption.inert=!aster;surfaceCaption.setAttribute('aria-hidden',String(!surface));oscillationCaption.setAttribute('aria-hidden',String(!aster));
 
