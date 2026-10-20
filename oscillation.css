@@ -80,3 +80,6 @@
 .stellar-illustration{grid-template-areas:"intro" "views" "degrees" "patterns" "description" "stage" "rotation" "label" "caption" "spectrum" "controls"}.stellar-illustration .rotation-toggle{grid-area:rotation;justify-self:center;margin:4px 0 8px;padding:6px 10px;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--secondary);font:inherit;font-size:12px;cursor:pointer}.rotation-toggle[hidden]{display:none}
 
 .stellar-illustration{grid-template-areas:"intro" "views" "degrees" "patterns" "description" "stage" "rotation" "controls" "label" "caption" "spectrum"}.stellar-illustration .oscillation-controls{justify-content:center;margin:4px 0 8px;font-size:12px}
+
+/* Reserve the longest mode description without exposing inactive text. */
+.mode-description-panel{display:grid}.mode-description-panel>.mode-description{grid-area:1 / 1;display:block}.mode-description-panel>.mode-description[hidden]{display:block!important;visibility:hidden}.mode-description-panel:not(:has(.mode-description:not([hidden]))){display:none}
