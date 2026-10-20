@@ -83,3 +83,5 @@
 
 /* Reserve the longest mode description without exposing inactive text. */
 .mode-description-panel{display:grid}.mode-description-panel>.mode-description{grid-area:1 / 1;display:block}.mode-description-panel>.mode-description[hidden]{display:block!important;visibility:hidden}.mode-description-panel:not(:has(.mode-description:not([hidden]))){display:none}
+
+@media(max-width:780px){.editorial .editorial-hero-illustrated .hero-concept.stellar-illustration{width:100%;max-width:440px;min-width:0;box-sizing:border-box;margin:35px auto 0;justify-self:center;grid-template-columns:minmax(0,1fr)}.stellar-illustration> *{min-width:0;max-width:100%;box-sizing:border-box}}
