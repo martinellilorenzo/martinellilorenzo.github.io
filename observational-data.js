@@ -16,18 +16,18 @@
     // Aperture outlines stay fixed: only the measured flux changes.
     ctx.strokeStyle='#a5ced9';ctx.lineWidth=1.2;for(let y=4;y<=6;y++)for(let x=4;x<=6;x++){ctx.strokeRect(left+x*size+.5,top+y*size+.5,size-1,size-1);}
     ctx.strokeStyle='#587583';ctx.strokeRect(left,top,450,450);
-    ctx.fillStyle='#e7d5a3';ctx.font='34px Inter, Arial, sans-serif';ctx.textAlign='left';ctx.fillText('Star',left+285,top+92);
+    ctx.fillStyle='#e7d5a3';ctx.font='34px Inter, Arial, sans-serif';ctx.textAlign='left';ctx.fillText(window.siteText('Star'),left+285,top+92);
     const ax=left+296,ay=top+106,bx=left+(5.1+.5)*size,by=top+(4.9+.5)*size;
     ctx.strokeStyle='#e7d5a3';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.stroke();
     const angle=Math.atan2(by-ay,bx-ax);ctx.beginPath();ctx.moveTo(bx-9*Math.cos(angle-.45),by-9*Math.sin(angle-.45));ctx.lineTo(bx,by);ctx.lineTo(bx-9*Math.cos(angle+.45),by-9*Math.sin(angle+.45));ctx.stroke();
-    ctx.fillStyle='#b7c8ce';ctx.font='34px Inter, Arial, sans-serif';ctx.textAlign='left';ctx.fillText(`t = ${(sample*cadenceSeconds/86400).toFixed(5)} days`,left,37);
+    ctx.fillStyle='#b7c8ce';ctx.font='34px Inter, Arial, sans-serif';ctx.textAlign='left';ctx.fillText(`t = ${(sample*cadenceSeconds/86400).toFixed(5)} ${window.siteLanguage?.()==='it'?'giorni':'days'}`,left,37);
     ctx.fillStyle='#b7c8ce';ctx.font='34px Inter, Arial, sans-serif';ctx.textAlign='center';
     for(let x=0;x<10;x+=2)ctx.fillText(660+x,left+(x+.5)*size,top+480);
-    ctx.fillText('Pixel column',left+225,top+525);ctx.textAlign='right';for(let y=0;y<10;y+=2)ctx.fillText(343-y,left-15,top+(y+.6)*size);
-    ctx.save();ctx.translate(16,top+225);ctx.rotate(-Math.PI/2);ctx.textAlign='center';ctx.fillText('Pixel row',0,0);ctx.restore();
+    ctx.fillText(window.siteText('Pixel column'),left+225,top+525);ctx.textAlign='right';for(let y=0;y<10;y+=2)ctx.fillText(343-y,left-15,top+(y+.6)*size);
+    ctx.save();ctx.translate(16,top+225);ctx.rotate(-Math.PI/2);ctx.textAlign='center';ctx.fillText(window.siteText('Pixel row'),0,0);ctx.restore();
     for(let j=0;j<450;j++){ctx.fillStyle=color((449-j)/449*2700);ctx.fillRect(605,top+j,20,1);}
     ctx.fillStyle='#b7c8ce';ctx.textAlign='left';ctx.font='34px Inter, Arial, sans-serif';for(const v of [0,500,1000,1500,2000,2500])ctx.fillText(v,636,top+450-v/2700*450+5);
-    ctx.save();ctx.translate(760,top+225);ctx.rotate(-Math.PI/2);ctx.textAlign='center';ctx.fillText('Flux (electrons / s)',0,0);ctx.restore();ctx.restore();
+    ctx.save();ctx.translate(760,top+225);ctx.rotate(-Math.PI/2);ctx.textAlign='center';ctx.fillText(window.siteText('Flux (electrons / s)'),0,0);ctx.restore();ctx.restore();
   }
   let last=0,next=0,visible=false,targetBrightness=0,brightness=0;const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   new IntersectionObserver(e=>{visible=e[0].isIntersecting;},{threshold:.05}).observe(panel);
@@ -44,6 +44,7 @@
     }
     last=time;requestAnimationFrame(tick);
   }
+  document.addEventListener('languagechange',draw);
   reduced.addEventListener('change',()=>{elapsed=0;sample=reduced.matches?totalSamples:0;connectLightcurve();draw();});
 
   sample=reduced.matches?totalSamples:0;connectLightcurve();draw();requestAnimationFrame(tick);

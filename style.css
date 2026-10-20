@@ -140,3 +140,7 @@
 .hero-affiliation-block{display:flex;align-items:center;gap:18px;margin:0 0 30px}.editorial .hero-affiliation-block .hero-affiliation{margin:0}.university-logo-link{display:block;flex:0 0 68px}.university-logo{display:block;width:68px;height:68px;object-fit:contain}
 
 .cv-entry{display:grid;grid-template-columns:125px minmax(0,1fr);gap:25px;border-top:1px solid var(--line);padding:23px 0}.cv-date{font-size:13px;color:#a0b0b9;padding-top:4px}.cv-entry h3{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:23px;margin:0 0 7px;line-height:1.35}.cv-entry p{margin:0;color:#aab9c1;font-size:14px}.cv-skills{color:#aab9c1;font-size:14px;margin:20px 0}.cv-skills strong{color:var(--text);font-weight:500;margin-right:12px}.cv-download{margin:24px 0 0;font-size:14px}.cv-download a{font-weight:600}@media(max-width:520px){.cv-entry{grid-template-columns:1fr;gap:7px}.editorial-header nav{gap:14px;flex-wrap:wrap}}
+
+/* Keep the introduction compact and both columns aligned at the top. */
+.editorial-hero.editorial-hero-illustrated{padding-top:48px;padding-bottom:64px;align-items:start}.editorial-hero-illustrated .hero-concept{align-self:start}
+@media(max-width:680px){.editorial-hero.editorial-hero-illustrated{padding-top:36px;padding-bottom:48px}}

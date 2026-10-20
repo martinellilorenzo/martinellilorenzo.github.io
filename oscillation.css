@@ -58,3 +58,25 @@
 .editorial .hero-copy .research-footnotes{font-size:12px;line-height:1.6;color:var(--secondary);margin:-12px 0 24px;padding-left:18px}.research-footnotes li{margin:5px 0;scroll-margin-top:24px}.hero-copy .lead sup{font-size:.65em;line-height:0;margin-left:2px}.hero-copy .lead sup a{text-decoration:none}
 
 .editorial .contact .contact-socials{display:flex;align-items:center;gap:20px}.contact-socials a{display:inline-flex;color:var(--accent);padding:4px}.contact-socials a:hover{color:var(--text)}.contact-socials svg{display:block}
+
+.language-switch{display:flex;gap:4px;flex-shrink:0}.language-switch button{font:inherit;font-size:12px;padding:5px 7px;color:var(--secondary);background:transparent;border:1px solid transparent;border-radius:4px;cursor:pointer}.language-switch button[aria-pressed="true"]{color:var(--accent);border-color:var(--accent)}.editorial-header{flex-wrap:wrap}.language-switch button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.stellar-illustration{grid-template-areas:"intro" "views" "degrees" "patterns" "stage" "label" "caption" "spectrum" "controls"}.editorial .illustration-intro-title{grid-area:intro;font-family:inherit;font-size:18px;font-weight:500;line-height:1.45;letter-spacing:0;margin:0 0 16px;color:var(--text)}
+
+.observational-panel > .observation-panel-label:first-child{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:0 .3em}
+
+.editorial .hero-concept.stellar-illustration .surface-caption{border-top:0;padding-top:0}.surface-legend-title{font-weight:500;color:var(--text)}
+
+.spectrum-key-gold{color:#f5d895}.spectrum-key-components{color:#5998b4}.spectrum-key-combined{color:#d6e5e9}.spectrum-key-noise{color:#9eb1ba}
+
+.lightcurve-animation{aspect-ratio:729/611}
+
+.stellar-illustration{grid-template-areas:"intro" "views" "degrees" "patterns" "description" "stage" "label" "caption" "spectrum" "controls"}.mode-description-panel{grid-area:description;font-size:12px;line-height:1.65;color:var(--secondary);margin:0 0 14px}.mode-description-panel:not(:has(.mode-description:not([hidden]))){display:none}
+
+.oscillation-stage{margin-top:24px;margin-bottom:24px}.oscillation-stage .stellar-rotation-guide{position:absolute;left:0;top:-6.25%;width:100%;height:112.5%;overflow:visible;pointer-events:none;z-index:3}
+
+.rotation-toggle{margin-left:8px}.rotation-disabled .oscillation-caption>span:first-child{display:none}
+
+.stellar-illustration{grid-template-areas:"intro" "views" "degrees" "patterns" "description" "stage" "rotation" "label" "caption" "spectrum" "controls"}.stellar-illustration .rotation-toggle{grid-area:rotation;justify-self:center;margin:4px 0 8px;padding:6px 10px;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--secondary);font:inherit;font-size:12px;cursor:pointer}.rotation-toggle[hidden]{display:none}
+
+.stellar-illustration{grid-template-areas:"intro" "views" "degrees" "patterns" "description" "stage" "rotation" "controls" "label" "caption" "spectrum"}.stellar-illustration .oscillation-controls{justify-content:center;margin:4px 0 8px;font-size:12px}

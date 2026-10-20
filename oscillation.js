@@ -19,6 +19,8 @@
     l2m1: {speed:114,l:2,n:21,m:1,still:'assets/profile242-l2m1-still.webp?v=2',field:'assets/profile242-l2m1-field.png?v=2'},
     l2m2: {speed:114,l:2,n:21,m:2,still:'assets/profile242-l2m2-still.webp?v=2',field:'assets/profile242-l2m2-field.png?v=2'}
   };
+  let rotationEnabled=true;
+  const rotationToggle=figure.querySelector('.rotation-toggle');
   let selected = 'surface', travelling = 1, lastDegree = 'l1';
   const submenu=figure.querySelector('.degree-submenu');
   const asterTab=figure.querySelector('#mode-asteroseismic');
@@ -74,6 +76,10 @@
   function update() {
     if(frame!==null){cancelAnimationFrame(frame);frame=null;}
     previous=null;
+    let nonrotating=figure.querySelector('.nonrotating-description');
+    if(!nonrotating){nonrotating=document.createElement('span');nonrotating.className='mode-description nonrotating-description';figure.querySelector('.mode-description-panel').append(nonrotating);}
+    nonrotating.hidden=rotationEnabled||!selected.startsWith('l');
+    if(!rotationEnabled){figure.querySelectorAll('[data-mode-description]').forEach(note=>note.hidden=true);const degree=Number(selected.slice(1));const it=window.siteLanguage?.()==='it';nonrotating.textContent=it?(degree===0?'ℓ = 0 è una pulsazione radiale: la stella si espande e si contrae sfericamente.':`ℓ = ${degree} è un’oscillazione non radiale con ${degree===1?'una linea nodale':'due linee nodali'} sulla superficie, dove lo spostamento radiale è nullo. La stella qui non ruota; le diverse componenti m hanno la stessa frequenza.`):(degree===0?'ℓ = 0 is a radial pulsation: the star expands and contracts spherically.':`ℓ = ${degree} is a nonradial oscillation with ${degree===1?'one surface nodal line':'two surface nodal lines'}, where radial displacement is zero. The star here is not rotating; its different m components have the same frequency.`);}
     const surface=selected==='surface',blank=selected==='observations',show=ready&&!motion.matches&&!blank;
     still.hidden=show||blank;canvas.hidden=!show||surface;contours.hidden=!show||surface;surfaceCanvas.hidden=!show||!surface;controls.hidden=!show;
     if(active())frame=requestAnimationFrame(tick);
@@ -122,9 +128,21 @@
     finally { if (loadingKey === key) loadingKey = null; }
   }
   function describeMode() {
+    const descriptionKey=selected==='l0'?'radial':selected+'-'+(travelling===0?'axisymmetric':'travelling');
+    figure.querySelectorAll('[data-mode-description]').forEach(note=>{note.hidden=note.dataset.modeDescription!==descriptionKey;});
+    let nonrotating=figure.querySelector('.nonrotating-description');
+    if(!nonrotating){nonrotating=document.createElement('span');nonrotating.className='mode-description nonrotating-description';figure.querySelector('.mode-description-panel').append(nonrotating);}
+    nonrotating.hidden=rotationEnabled||!selected.startsWith('l');
+    if(!rotationEnabled){figure.querySelectorAll('[data-mode-description]').forEach(note=>note.hidden=true);const degree=Number(selected.slice(1));const it=window.siteLanguage?.()==='it';nonrotating.textContent=it?(degree===0?'ℓ = 0 è una pulsazione radiale: la stella si espande e si contrae sfericamente.':`ℓ = ${degree} è un’oscillazione non radiale con ${degree===1?'una linea nodale':'due linee nodali'} sulla superficie, dove lo spostamento radiale è nullo. La stella qui non ruota; le diverse componenti m hanno la stessa frequenza.`):(degree===0?'ℓ = 0 is a radial pulsation: the star expands and contracts spherically.':`ℓ = ${degree} is a nonradial oscillation with ${degree===1?'one surface nodal line':'two surface nodal lines'}, where radial displacement is zero. The star here is not rotating; its different m components have the same frequency.`);}
     const surface=selected==='surface',blank=selected==='observations',aster=!surface&&!blank;
+    figure.querySelector('.stellar-rotation-guide').toggleAttribute('hidden',!aster||!rotationEnabled);
+    contours.style.visibility=rotationEnabled?'':'hidden';
+    rotationToggle.textContent=window.siteLanguage?.()==='it'?(rotationEnabled?'Rimuovi rotazione':'Ripristina rotazione'):(rotationEnabled?'Remove rotation':'Restore rotation');
+    rotationToggle.setAttribute('aria-pressed',String(!rotationEnabled));
+    rotationToggle.hidden=!aster;
+    figure.classList.toggle('rotation-disabled',!rotationEnabled);
     observations.hidden=!blank;figure.classList.toggle('show-observations',blank);
-    submenu.hidden=false;submenu.style.visibility=aster?'visible':'hidden';submenu.inert=!aster;submenu.setAttribute('aria-hidden',String(!aster));multipletPanel.hidden=!aster;if(aster&&spectrum)spectrum.draw(Number(selected.slice(1)),travelling);asterTab.setAttribute('aria-expanded',String(aster));
+    submenu.hidden=false;submenu.style.visibility=aster?'visible':'hidden';submenu.inert=!aster;submenu.setAttribute('aria-hidden',String(!aster));multipletPanel.hidden=!aster;if(aster&&spectrum)spectrum.draw(Number(selected.slice(1)),travelling,rotationEnabled);asterTab.setAttribute('aria-expanded',String(aster));
     patterns.hidden=false;patterns.style.visibility=aster?'visible':'hidden';patterns.inert=!aster;patterns.setAttribute('aria-hidden',String(!aster));
     surfaceCaption.hidden=false;oscillationCaption.hidden=false;
     surfaceCaption.style.visibility=surface?'visible':'hidden';oscillationCaption.style.visibility=aster?'visible':'hidden';
@@ -166,7 +184,7 @@
     panelCycleTimer=setTimeout(()=>{
       if(!document.hidden&&visible){selectMode(selected==='surface'?'observations':selected==='observations'?'asteroseismic':'surface');}
       else restartPanelCycle();
-    },30000);
+    },60000);
   }
   function selectMode(key) {
     restartPanelCycle();
@@ -183,6 +201,7 @@
     if(next===travelling)return;
     travelling=next;resetField();
   }));
+  rotationToggle.addEventListener('click',()=>{rotationEnabled=!rotationEnabled;describeMode();restartPanelCycle();});
   describeMode();
   restartPanelCycle();
   tabs.forEach((tab,index) => {
@@ -196,5 +215,6 @@
       if (target) { event.preventDefault(); target.focus(); selectMode(target.dataset.mode); }
     });
   });
+  document.addEventListener('languagechange',()=>{describeMode();});
   motion.addEventListener('change', () => { if (!motion.matches && visible) initialize(); update(); });
 })();
